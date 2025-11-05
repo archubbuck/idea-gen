@@ -52,6 +52,30 @@ firebase deploy --only hosting
 
 The command will output a Hosting URL (e.g., `https://your-project-id.web.app`). Open this URL in your browser to see your live application.
 
+## Continuous Deployment with GitHub Actions
+
+This repository includes a GitHub Actions workflow that automatically deploys to Firebase Hosting when changes are pushed to the `main` branch.
+
+### Required GitHub Secrets
+
+To enable automatic deployment, configure the following secrets in your GitHub repository settings (Settings > Secrets and variables > Actions):
+
+1. **FIREBASE_SERVICE_ACCOUNT**: Your Firebase service account key (JSON format)
+   - Generate this in the Firebase Console: Project Settings > Service Accounts > Generate New Private Key
+   - Store the entire JSON content as the secret value
+
+2. **FIREBASE_PROJECT_ID**: Your Firebase project ID
+   - Find this in the Firebase Console: Project Settings > General
+
+### How to Set Up GitHub Secrets
+
+1. Go to your GitHub repository
+2. Click on **Settings** > **Secrets and variables** > **Actions**
+3. Click **New repository secret**
+4. Add each secret with the exact names shown above
+
+Once configured, every push to the `main` branch will automatically trigger a deployment to Firebase Hosting.
+
 ## How It Works
 
 * **index.html**: This single file contains your entire React application. It loads React, ReactDOM, Firebase, and other libraries from a CDN, and uses Babel (also from a CDN) to compile the JSX (React's HTML-like syntax) directly in the browser.
